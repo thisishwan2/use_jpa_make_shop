@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    #DB 접근
+    url: jdbc:h2:tcp://localhost/~/jpashop #MVCC=TRUE 는 권장.(여러개가 한번에 접근시 빠르게 처리)
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      #이 옵션은 애플리케이션 실행 시점에 테이블을 drop(지우다) 하고, 다시 생성한다.
+      ddl-auto: create #create는 자동으로 테이블을 만들어주는 모드
+    #properties는 hibernate와 관련된 특정 property를 쓸 수 있음.
+    properties:
+      hibernate:
+        #show_sql: true #옵션은 System.out 에 하이버네이트 실행 SQL을 남긴다.(실제 서비스는 sout으로 찍으면 안됨.)
+        format_sql: true
+#로그 레벨을 정한다.
+logging:
+  level:
+    org.hibernate.SQL: debug # debug 모드는 jpa, 하이버네이트가 생성하는 sql이 다 보인다.
+    org.hibernate.orm.jdbc.bind: trace
